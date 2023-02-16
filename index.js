@@ -34,7 +34,7 @@ app.listen(port, async()=>{
     await connect()
     console.log(`app is running at port:${port}`)
   }catch(e){
-    console.log(e.message);
+    console.log(e.message)
   }
 })
 
