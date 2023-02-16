@@ -65,6 +65,7 @@ const AddNote = (props) => {
             onDone={({ base64 }) => {
               setNote({ ...note, image: base64 });
             }}
+            required
           />
         </div>
 
@@ -79,6 +80,8 @@ const AddNote = (props) => {
             name="tag"
             value={note.tag}
             onChange={changeHandler}
+            required
+            minLength={2}
           />
         </div>
         <button type="submit" className="btn btn-primary">

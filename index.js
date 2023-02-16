@@ -16,16 +16,16 @@ app.use(express.json())
 app.use(require('./Routes/userRoutes'));
 app.use(require('./Routes/notesRoutes'));
 
-// app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "./client/build")));
 
-// app.get("*",function(_, res){
-//   res.sendFile(
-//     path.join(__dirname, "./client/build/index.html"),
-//     function(err){
-//       res.status(500).send(err);
-//     }
-//   )
-// });
+app.get("*",function(_, res){
+  res.sendFile(
+    path.join(__dirname, "./client/build/index.html"),
+    function(err){
+      res.status(500).send(err);
+    }
+  )
+});
 
 
 app.listen(port,()=>{

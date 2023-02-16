@@ -25,7 +25,7 @@ const App = () => {
     <Alert alert={alert}/>
     <div className="container">
       <Routes>
-      <Route path="/" element={<Login showAlert={showAlert}/>}/>
+      <Route path="/" element={<SignUp showAlert={showAlert}/>}/>
       <Route path="/home" element={<Home showAlert={showAlert} />}/>
       <Route path="/login" element={<Login showAlert={showAlert}/>}/>
       <Route path="/signup" element={<SignUp showAlert={showAlert}/>}/>
