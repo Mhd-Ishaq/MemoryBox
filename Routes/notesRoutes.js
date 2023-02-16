@@ -27,7 +27,7 @@ router.post('/addNote',fetchUser,[
 ], async(req,res)=>{
 
   try {
-    const{title,description,tag}= req.body; 
+    const{title,description,image,tag}= req.body; 
 
     const errors = validationResult(req);
     if(!errors.isEmpty()){
@@ -35,7 +35,7 @@ router.post('/addNote',fetchUser,[
     }
 
     const note = new Note({
-      title,description,tag,user:req.user.id
+      title,description,image,tag,user:req.user.id
     });
     const savedNote =  await note.save();
     res.json(savedNote);
@@ -48,7 +48,7 @@ router.post('/addNote',fetchUser,[
 
 })
 router.put('/updateNote/:id',fetchUser, async(req,res)=>{
-  const{title,description,tag}= req.body; 
+  const{title,description,image,tag}= req.body; 
 
   try {
 
@@ -58,6 +58,9 @@ router.put('/updateNote/:id',fetchUser, async(req,res)=>{
     }
     if(description){
       newNote.description = description;
+    }
+    if(image){
+      newNote.image = image;
     }
     if(tag){
       newNote.tag = tag;
@@ -75,7 +78,7 @@ router.put('/updateNote/:id',fetchUser, async(req,res)=>{
       return res.status(401).send('Not allowed');
     }
 
-    note = await Note.findByIdAndUpdate(req.params.id,{$set :newNote},{new:true});
+    note = await Note.findByIdAndUpdate(req.params.id, {$set :newNote},{new:true});
     res.json({note});
 
   }catch(error){

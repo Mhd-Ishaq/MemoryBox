@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import NoteContext from './noteContext';
 
 const NoteState = ({children}) => {
-  const host = "http://localhost:5000";
   const [notes,setNotes] = useState([]);
 
   const getNotes = async ()=>{
-    const response =await fetch(`${host}/fetchAllNotes`,{
+    const response =await fetch('/fetchAllNotes',{
       method:"GET",
       headers:{
         "Content-Type":"application/json",
@@ -18,14 +17,14 @@ const NoteState = ({children}) => {
     setNotes(result);
   }
 
-  const addNote =async (title,description,tag)=>{
-    const response = await fetch(`${host}/addNote`,{
+  const addNote =async (title,description,image,tag)=>{
+    const response = await fetch('/addNote',{
       method:"POST",
       headers:{
         "Content-Type":"application/json",
         "auth-token": localStorage.getItem('token') 
         },
-      body:JSON.stringify({title,description,tag})
+      body:JSON.stringify({title,description,image,tag})
     });
 
     const note = await response.json();
@@ -34,7 +33,7 @@ const NoteState = ({children}) => {
   }
   
   const deleteNote =async (id)=>{
-    const response = await fetch(`${host}/deleteNote/${id}`,{
+    const response = await fetch(`/deleteNote/${id}`,{
       method:"DELETE",
       headers:{
         "Content-Type":"application/json",
@@ -55,13 +54,14 @@ const NoteState = ({children}) => {
 
   }
 
-  const editNote =async (id,title,description,tag)=>{
-    const response = await fetch(`${host}/updateNote/${id}`,{
+  const editNote =async (id,title,description,image,tag)=>{
+    const response = await fetch(`/updateNote/${id}`,{
       method:"PUT",
       headers:{
-        "Content-Type":localStorage.getItem('token')
+        "Content-Type":"application/json",
+        "auth-token":localStorage.getItem('token')
         },
-      body:JSON.stringify({title,description,tag})
+      body:JSON.stringify({title,description,image,tag})
     });
 
     const result = await response.json();
@@ -91,6 +91,6 @@ const NoteState = ({children}) => {
     </NoteContext.Provider>
 
   )
-}
+  }
 
 export default NoteState;

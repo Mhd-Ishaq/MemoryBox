@@ -1,28 +1,33 @@
-import React, { useContext, useState } from 'react';
-import noteContext from '../context/Notes/noteContext'
+import React, { useContext, useState } from "react";
+import FileBase64 from "react-file-base64";
+import noteContext from "../context/Notes/noteContext";
 
 const AddNote = (props) => {
   const context = useContext(noteContext);
-  const {addNote} = context;
-  const [note, setNote] = useState({title:"",description:"",tag:""});
+  const { addNote } = context;
+  const [note, setNote] = useState({
+    title: "",
+    description: "",
+    image: "",
+    tag: "",
+  });
 
+  const changeHandler = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
 
-  const changeHandler = (e)=>{
-    setNote({...note,[e.target.name]:e.target.value})
-  }
-
-  const submitHandler =(e)=>{
-    const {title,description,tag}= note;
+  const submitHandler = (e) => {
+    const { title, description, image, tag } = note;
     e.preventDefault();
-    addNote(title,description,tag);
-    setNote({title:"",description:"",tag:""});
-    props.showAlert("Note added successfully",'success');
-  }
+    addNote(title, description, image, tag);
+    setNote({ title: "", description: "", image: "", tag: "" });
+    props.showAlert("Note added successfully", "success");
+  };
 
   return (
-    <div className="container my-3" >
-      <form  onSubmit={submitHandler}>
-        <h2>Add Notes</h2>
+    <div className="container my-3">
+      <form onSubmit={submitHandler}>
+        <h2>Create your Posts</h2>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
             Title
@@ -54,8 +59,18 @@ const AddNote = (props) => {
           />
         </div>
         <div className="mb-3">
+          <label className="form-label">Image</label>
+          <FileBase64
+            multiple={false}
+            onDone={({ base64 }) => {
+              setNote({ ...note, image: base64 });
+            }}
+          />
+        </div>
+
+        <div className="mb-3">
           <label htmlFor="tag" className="form-label">
-            Tag
+            Keywords
           </label>
           <input
             type="text"
@@ -66,10 +81,12 @@ const AddNote = (props) => {
             onChange={changeHandler}
           />
         </div>
-        <button type="submit" className="btn btn-primary">Add Notes</button>
+        <button type="submit" className="btn btn-primary">
+          Add Post
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddNote
+export default AddNote;

@@ -14,9 +14,13 @@ const noteSchema = new mongoose.Schema({
     type:String,
     required: true,
   },
+  image:{
+    type:String,
+    required:true,
+  },
   tag:{
     type:String,
-    default:'General'
+    required:true,
   },
   date:{
     type:Date,

@@ -11,7 +11,7 @@ const SignUp = (props) => {
   };
   const submitHandler = async (e)=>{
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/createUser",{
+    const response = await fetch("/createUser",{
       method:'POST',
       headers:{
         'Content-Type':'application/json'
@@ -26,7 +26,7 @@ const SignUp = (props) => {
       props.showAlert("Account Created Successfully",'success');
       navigate('/home');
     }else{
-      props.showAlert("User with this email is already exists ",'danger');
+      props.showAlert("User with this email is already exists or Enter the correct email ",'danger');
     }
 
 

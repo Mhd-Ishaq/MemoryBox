@@ -1,5 +1,4 @@
 import React,{useState} from "react";
-import About from "./components/About";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
@@ -26,9 +25,8 @@ const App = () => {
     <Alert alert={alert}/>
     <div className="container">
       <Routes>
-      <Route path="/" element={<Login showAlert={showAlert}/> }/>
+      <Route path="/" element={<Login showAlert={showAlert}/>}/>
       <Route path="/home" element={<Home showAlert={showAlert} />}/>
-      <Route path="/about" element={<About />}/>
       <Route path="/login" element={<Login showAlert={showAlert}/>}/>
       <Route path="/signup" element={<SignUp showAlert={showAlert}/>}/>
       
