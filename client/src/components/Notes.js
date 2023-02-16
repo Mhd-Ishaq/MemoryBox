@@ -169,9 +169,9 @@ const Notes = ({showAlert}) => {
       </div>
 
       <div className=" row my-3">
-        <h2>Your Posts</h2>
+        <h2 style={{textAlign:"center",marginTop:"10px"}}>Your Posts</h2>
         <div className="container mx-2">
-          {notes.length ===0 && "No notes to display"}
+          {notes.length ===0 && "No Posts to display"}
         </div>
         {
           notes.map((note) => {

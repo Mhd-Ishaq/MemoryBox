@@ -59,7 +59,7 @@ const AddNote = (props) => {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">Image</label>
+          <label className="form-label">Image: </label>
           <FileBase64
             multiple={false}
             onDone={({ base64 }) => {
