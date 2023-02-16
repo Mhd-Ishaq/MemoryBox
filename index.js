@@ -1,4 +1,5 @@
 const express = require('express');
+const connect =require('./db');
 const app = express();
 const dotenv = require("dotenv");
 const bodyParser = require('body-parser');
@@ -7,7 +8,7 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 dotenv.config();
 const port = process.env.PORT || 5000;
 const path = require("path");
-require('./db');
+
 const cors = require('cors');
 
 app.use(cors());
@@ -28,8 +29,13 @@ app.get("*",function(_, res){
 });
 
 
-app.listen(port,()=>{
-  console.log(`app is running at port:${port}`)
+app.listen(port, async()=>{
+  try{
+    await connect()
+    console.log(`app is running at port:${port}`)
+  }catch(e){
+    console.log(e.message);
+  }
 })
 
 
