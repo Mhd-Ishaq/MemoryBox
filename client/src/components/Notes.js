@@ -9,7 +9,8 @@ const Notes = ({showAlert}) => {
   const navigate = useNavigate();
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
-  notes = notes.reverse();
+  console.log(typeof notes);
+  const newNotes = notes.reverse();
   useEffect(() => {
     if(localStorage.getItem('token')){
       getNotes();
@@ -172,10 +173,10 @@ const Notes = ({showAlert}) => {
       <div className=" row my-3">
         <h2 style={{textAlign:"center",marginTop:"10px"}}>Your Posts</h2>
         <div className="container mx-2">
-          {notes.length ===0 && "No Posts to display"}
+          {newNotes.length ===0 && "No Posts to display"}
         </div>
         {
-          notes.map((note) => {
+          newNotes.map((note) => {
             return (
               <NoteItem key={note._id} updateNote={updateNote} note={note} showAlert={showAlert} />
             );
