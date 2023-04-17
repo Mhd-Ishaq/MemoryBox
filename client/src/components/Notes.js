@@ -9,6 +9,7 @@ const Notes = ({showAlert}) => {
   const navigate = useNavigate();
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
+  notes = notes.reverse();
   useEffect(() => {
     if(localStorage.getItem('token')){
       getNotes();
